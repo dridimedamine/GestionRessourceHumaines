@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        
+    </h:head>
+    <h:body>
+        <h:form enctype="multipart/form-data">
+        
+       
+       <p:outputLabel for="descriptionEtType" value="description " />
+       <p:inputText id="descriptionEtType" value="#{CongesMaladiesMB.descriptionEtType}" required="true" />
+       <p:message for="descriptionEtType" />
+<br />
+ <p:outputLabel for="dateDebutCm" value="date debut" />
+ <p:calendar id="dateDebutCm" value="#{CongesMaladiesMB.dateDebutCm}" required="true" />
+       <p:message for="dateDebutCm" />
+<br />
+ <p:outputLabel for="dateFinCm" value="date fin" />
+ <p:calendar id="dateFinCm" value="#{CongesMaladiesMB.dateFinCm}" required="true" />
+       <p:message for="dateFinCm" />
+<br />
+
+ 
+ <p:outputLabel for="justification" value="justification" />
+ <h:inputFile id="justification" value="#{CongesMaladiesMB.file}" required="true" />
+       <p:message for="justification" />
+<br />
+<p:selectOneMenu id="idPersonnel" value="#{CongesMaladiesMB.selectedCM}"> 
+
+    <f:selectItems value="#{PersonnelMB.mesPersonel}"/>
+
+                            </p:selectOneMenu> 
+<br />
+<p:commandButton id="addCongesMaladies"  action="#{CongesMaladiesMB.addCongesMaladies()}"  value="Ajouter"  ajax="false"/>
+                  <p:commandButton id="reset" action="f/addCongesMaladies.xhtml" value="Annuler" ajax="false"/>
+        </h:form>
+    </h:body>
+</html>
+

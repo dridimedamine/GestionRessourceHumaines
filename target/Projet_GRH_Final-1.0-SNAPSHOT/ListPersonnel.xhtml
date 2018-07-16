@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+     <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" />
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css" />
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css" />
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/iCheck/flat/blue.css" />
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="plugins/morris/morris.css" />
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css" />
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="plugins/datepicker/datepicker3.css" />
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css" />
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <style type="text/css" media="print">
+#imprimer {
+display:none;
+}
+</style>
+      <h:head>
+     
+    </h:head>
+    <h:body>
+        <a href="#" id="imprimer" onclick="impression()" class="btn btn-default">Imprimer</a>
+        <h:form id="frm" enctype="multipart/form-data">  
+             <p:growl id="growl" showDetail="true" sticky="true" />  
+            <p:dataTable var="lst" value="#{PersonnelMB.listPersonnel}" id="tbl">
+    <p:column headerText="nom et prenom">
+        <h:outputText value="#{lst.nomPrenomPersonnel}" />
+    </p:column>
+ 
+   
+ 
+    <p:column headerText="cin">
+        <h:outputText value="#{lst.cin}" />
+    </p:column>
+ 
+    <p:column headerText="adresse">
+        <h:outputText value="#{lst.adresse}" />
+    </p:column>
+                 <p:column headerText="num_tel">
+                     <h:outputText value="#{lst.numTelPersonnel}" />
+    </p:column>
+                 
+            
+                 <p:column headerText="post">
+                     <h:outputText value="#{lst.post}" />
+                 </p:column>
+                <p:column headerText="salaire">
+                    <h:outputText value="#{lst.salaire}" />
+    </p:column>
+                <p:column headerText="plan">
+                    <a href="#{lst.cvPersonnel}" target="_blanc">   <p:graphicImage value="#{lst.cvPersonnel}" width="200" height="180" /></a>
+    </p:column>
+                
+                
+            <p:column headerText="Action">
+      <p:growl id="message" showDetail="true" />
+      
+  <p:commandButton update=":frm:detail1"  icon ="ui-icon-refresh"  title="View" oncomplete="PF('dlg1').show()">
+      <f:setPropertyActionListener value="#{lst}" target="#{PersonnelMB.selectedPersonnel}" />
+  </p:commandButton>
+      
+ 
+      <p:commandButton icon="ui-icon-trash" actionListener="#{PersonnelMB.supprimerPersonnel(lst)}"  update=":frm:tbl">
+        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+    </p:commandButton>
+      
+ 
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+    </p:confirmDialog>
+    </p:column>
+</p:dataTable>
+            
+            <p:dialog id="dialog1" widgetVar="dlg1" showEffect="fade" hideEffect="fade"  header="Mettre à jour personnel" modal="true" width="500" height="500">
+                <p:outputPanel id="detail1" style="text-align:center;" layout="block">                   
+                    <table class="table table-bordered  table-hover">   
+                     <tr>
+                        <td><h:outputText value="CIN"  styleClass="form-control"/></td>
+                        <td><h:inputText value="#{PersonnelMB.selectedPersonnel.cin}" styleClass="form-control" /> </td>
+                      </tr>
+                        <tr>
+                        <td><h:outputText value="Nom"  styleClass="form-control"/></td>
+                        <td><h:inputText value="#{PersonnelMB.selectedPersonnel.nomPrenomPersonnel}" styleClass="form-control" /> </td>
+                      </tr>
+                        <tr>
+                        <td><h:outputText value="Adresse"  styleClass="form-control"/></td>
+                        <td><h:inputText value="#{PersonnelMB.selectedPersonnel.adresse}" styleClass="form-control" /> </td>
+                      </tr>
+                     
+                           <tr>
+                        <td><h:outputText value="Numero Telephone"  styleClass="form-control"/></td>
+                        <td><h:inputText value="#{PersonnelMB.selectedPersonnel.numTelPersonnel}" styleClass="form-control" /> </td>
+                      </tr>
+                        <tr>
+                        <td><h:outputText value="Post"  styleClass="form-control"/></td>
+                        <td><h:inputText value="#{PersonnelMB.selectedPersonnel.post}" styleClass="form-control" /> </td>
+                      </tr>
+                        <tr>
+                        <td><h:outputText value="Salaire"  styleClass="form-control"/></td>
+                        <td><h:inputText value="#{PersonnelMB.selectedPersonnel.salaire}" styleClass="form-control" /> </td>
+                      </tr>
+                     
+                        
+                       <tr>
+                           <td colspan="2"><p:commandButton styleClass="btn btn-md btn-primary" action="#{PersonnelMB.upadtePersonnel(PersonnelMB.selectedPersonnel)}" update="growl" ajax="false" value="Mettre a jour"/></td>
+                      </tr> 
+                         
+                         </table>
+                    
+                </p:outputPanel>
+
+            </p:dialog> 
+            
+        </h:form>
+        <script>
+            function impression(){
+                print();
+            }
+            
+            
+        </script>
+       
+    </h:body>
+</html>
+
+

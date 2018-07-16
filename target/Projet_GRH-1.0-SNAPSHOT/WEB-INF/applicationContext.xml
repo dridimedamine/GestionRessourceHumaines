@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+    <!--bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          p:location="/WEB-INF/jdbc.properties" />
+
+<bean id="dataSource"
+    class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+    p:driverClassName="${jdbc.driverClassName}"
+    p:url="${jdbc.url}"
+    p:username="${jdbc.username}"
+    p:password="${jdbc.password}" /-->
+
+    <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
+<!-- beans Declaration -->
+
+ <bean id="Absence" class="model.pojo.Absence"/>
+<bean id="Candidat" class="model.pojo.Candidat"/>
+<bean id="CongeMaladie" class="model.pojo.CongeMaladie"/>
+<bean id="CongeNormal" class="model.pojo.CongeNormal"/>
+<bean id="Formateur" class="model.pojo.Formateur"/>
+<bean id="Formation" class="model.pojo.Formation"/>
+<bean id="HeureSupplementaire" class="model.pojo.HeureSupplementaire"/>
+<bean id="Personnel" class="model.pojo.Personnel"/>
+<bean id="Projet" class="model.pojo.Projet"/>
+
+
+
+
+
+ <!-- Service Declaration -->
+ <bean id="AbsenceService" class="model.service.AbsenceService">
+  <property name="absenceDAO" ref="AbsenceDAO" />
+ </bean>
+ <bean id="CandidatService" class="model.service.CandidatService">
+  <property name="candidatDAO" ref="CandidatDAO" />
+ </bean>
+ <bean id="CongeMaladieService" class="model.service.CongeMaladieService">
+  <property name="congeMaladieDAO" ref="CongeMaladieDAO" />
+ </bean>
+ <bean id="CongeNormalService" class="model.service.CongeNormalService">
+  <property name="congeNormalDAO" ref="CongeNormalDAO" />
+ </bean>
+ <bean id="FormateurService" class="model.service.FormateurService">
+  <property name="FormateurDAO" ref="FormateurDAO" />
+ </bean>
+ <bean id="FormationService" class="model.service.FormationService">
+  <property name="formationDAO" ref="FormationDAO" />
+ </bean>
+ <bean id="HeureSupplementaireService" class="model.service.HeureSupplementaireService">
+  <property name="iHeureSupplementaireDAO" ref="HeureSupplementaireDAO" />
+ </bean>
+ <bean id="PersonnelService" class="model.service.PersonnelService">
+  <property name="personnelDAO" ref="PersonnelDAO" />
+ </bean>
+ 
+ <bean id="ProjetService" class="model.service.ProjetService">
+  <property name="projetDAO" ref="ProjetDAO" />
+ </bean>
+ 
+
+
+
+<!-- DAO Declaration -->
+ <bean id="AbsenceDAO" class="model.DAO.AbsenceDAO">
+  <property name="sessionFactory" ref="SessionFactory" />
+ </bean>
+
+ <bean id="CandidatDAO" class="model.DAO.CandidatDAO">
+  <property name="sessionFactory" ref="SessionFactory" />
+ </bean>
+
+ <bean id="CongeMaladieDAO" class="model.DAO.CongeMaladieDAO">
+  <property name="sessionFactory" ref="SessionFactory" />
+ </bean>
+
+ <bean id="CongeNormalDAO" class="model.DAO.CongeNormalDAO">
+  <property name="sessionFactory" ref="SessionFactory" />
+ </bean>
+
+ <bean id="FormateurDAO" class="model.DAO.FormateurDAO">
+  <property name="sessionFactory" ref="SessionFactory" />
+ </bean>
+
+ <bean id="FormationDAO" class="model.DAO.FormationDAO">
+  <property name="sessionFactory" ref="SessionFactory" />
+ </bean>
+
+ <bean id="HeureSupplementaireDAO" class="model.DAO.HeureSupplementaireDAO">
+  <property name="sessionFactory" ref="SessionFactory" />
+ </bean>
+
+ <bean id="PersonnelDAO" class="model.DAO.PersonnelDAO">
+  <property name="sessionFactory" ref="SessionFactory" />
+ </bean>
+
+
+ <bean id="ProjetDAO" class="model.DAO.ProjetDAO">
+  <property name="sessionFactory" ref="SessionFactory" />
+ </bean>
+
+ 
+ 
+ 
+ 
+ 
+  <!-- Data Source Declaration -->
+ <bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+  <property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+  <property name="jdbcUrl" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=Application_GRH" />
+  <property name="user" value="sa" />
+  <property name="password" value="root" />
+ </bean>
+
+ 
+ <!-- Session Factory Declaration -->
+ <bean id="SessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+  <property name="dataSource" ref="DataSource" />
+  <property name="annotatedClasses">
+   <list>
+    <value>model.pojo.Absence</value>
+    
+    
+    <value>model.pojo.Candidat</value>
+
+    <value>model.pojo.CongeMaladie</value>
+
+    <value>model.pojo.CongeNormal</value>
+
+    
+
+    <value>model.pojo.Formateur</value>
+
+    
+
+    <value>model.pojo.Formation</value>
+
+    <value>model.pojo.HeureSupplementaire</value>
+
+    <value>model.pojo.Personnel</value>
+
+   
+
+    <value>model.pojo.Projet</value>
+
+    
+
+    
+  
+
+   </list>
+  </property>
+  <property name="hibernateProperties">
+   <props>
+    <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+    <prop key="hibernate.show_sql">true</prop>
+    
+   </props>
+  </property>
+ 
+ </bean>
+
+ <!-- Enable the configuration of transactional behavior based on annotations -->
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+ <!-- Transaction Manager is defined -->
+    <bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+       <property name="sessionFactory" ref="SessionFactory"/>
+    </bean>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+</beans>

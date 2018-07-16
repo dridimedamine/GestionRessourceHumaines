@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <style type="text/css" media="print">
+#imprimer, #colone {
+display:none;
+}
+</style>
+    
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Essafa Service</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" />
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css" />
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css" />
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/iCheck/flat/blue.css" />
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="plugins/morris/morris.css" />
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css" />
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="plugins/datepicker/datepicker3.css" />
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css" />
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+      <h:head>
+     
+    </h:head>
+    <h:body>
+       
+        <a href="#" id="imprimer" onclick="impression()" class="btn btn-danger">Imprimer</a>
+        <h:form id="frm">  
+            <p:growl id="growl" showDetail="true" sticky="false"/>
+            <p:dataTable var="lst" value="#{ProjetMB.listProjet}" id="tbl">
+    
+               <p:column headerText="plan">
+                <a href="#{lst.planProjet}" target="_blanc">   <p:graphicImage value="#{lst.planProjet}" width="200" height="180" /></a>
+    </p:column>
+                <p:column headerText="titre">
+                    <h:outputText value="#{lst.titreProjet}" />
+    </p:column>
+                <p:column headerText="budget">
+        <h:outputText value="#{lst.budget}" />
+    </p:column>
+ 
+   
+ 
+    <p:column headerText="dure">
+        <h:outputText value="#{lst.dureProjet}" />
+    </p:column>
+ 
+    
+                 <p:column headerText="nombre personnel">
+                     <h:outputText value="#{lst.nbrPersonnel}" />
+    </p:column>
+                 
+            
+                
+                <p:column headerText="Action" id="colone">
+      <p:growl id="message" showDetail="true" />
+      
+  <p:commandButton update=":frm:detail1"  icon ="ui-icon-refresh"  title="View" oncomplete="PF('dlg1').show()">
+      <f:setPropertyActionListener value="#{lst}" target="#{ProjetMB.selectetedProjet}" />
+  </p:commandButton>
+      
+ 
+      <p:commandButton icon="ui-icon-trash" actionListener="#{ProjetMB.SupprimerProjet(lst)}"  update=":frm:tbl">
+        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+    </p:commandButton>
+      
+ 
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+    </p:confirmDialog>
+    </p:column>
+</p:dataTable>
+            <p:dialog id="dialog1" widgetVar="dlg1" showEffect="fade" hideEffect="fade"  header="Mettre à jour founisseur" modal="true" width="500" height="500">
+                <p:outputPanel id="detail1" style="text-align:center;" layout="block">                   
+                    <table class="table table-bordered  table-hover">   
+                     <tr>
+                        <td><h:outputText value="budget"  styleClass="form-control"/></td>
+                        <td><h:inputText value="#{ProjetMB.selectetedProjet.budget}" styleClass="form-control" /> </td>
+                      </tr>
+                        <tr>
+                        <td><h:outputText value="dure"  styleClass="form-control"/></td>
+                        <td><h:inputText value="#{ProjetMB.selectetedProjet.dureProjet}" styleClass="form-control" /> </td>
+                      </tr>
+                        <tr>
+                        <td><h:outputText value="nombre personnel"  styleClass="form-control"/></td>
+                        <td><h:inputText value="#{ProjetMB.selectetedProjet.nbrPersonnel}" styleClass="form-control" /> </td>
+                      </tr>
+                     
+                           <tr>
+                        <td><h:outputText value="titre projet"  styleClass="form-control"/></td>
+                        <td><h:inputText value="#{ProjetMB.selectetedProjet.titreProjet}" styleClass="form-control" /> </td>
+                      </tr>
+                     
+                        
+                       <tr>
+                           <td colspan="2"><p:commandButton styleClass="btn btn-md btn-primary" action="#{ProjetMB.updateProjet(ProjetMB.selectetedProjet)}" update="growl" ajax="false" value="Mettre a jour"/></td>
+                      </tr> 
+                         
+                         </table>
+                    
+                </p:outputPanel>
+
+            </p:dialog> 
+            
+            
+            
+            
+        </h:form>
+        
+        <script>
+            function impression(){
+                print();
+            }
+        </script>
+    </h:body>
+</html>
+
+

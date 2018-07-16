@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="hibernate.connection.url">jdbc:sqlserver://127.0.0.1:1433;databaseName=Application_GRH</property>
+    <property name="hibernate.connection.username">sa</property>
+    <property name="hibernate.connection.password">root</property>
+    
+  
+    
+    <mapping class="model.pojo.CongeMaladie"/>
+    <mapping class="model.pojo.Formateur"/>
+    <mapping class="model.pojo.HeureSupplementaire"/>
+    <mapping class="model.pojo.Absence"/>
+    <mapping class="model.pojo.CongeNormal"/>
+    <mapping class="model.pojo.Projet"/>
+    <mapping class="model.pojo.Candidat"/>
+    <mapping class="model.pojo.Formation"/>
+    <mapping class="model.pojo.Personnel"/>
+  </session-factory>
+</hibernate-configuration>

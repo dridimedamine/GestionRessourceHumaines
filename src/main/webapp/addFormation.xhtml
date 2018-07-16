@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        
+    </h:head>
+    <h:body>
+        <h:form>
+        
+       
+       <p:outputLabel for="nombreHeure" value="nembre de heures du formation :" />
+       <p:inputText id="nombreHeure" value="#{FormationMB.nombreHeure}" required="true" />
+       <p:message for="nombreHeure" />
+<br />
+        <p:outputLabel for="Domaine" value="Domaine du formation :" />
+        <p:inputText id="Domaine" value="#{FormationMB.domaine}" required="true" />
+        <p:message for="Domaine" />
+     <br />
+      <p:outputLabel for="dateDebutFormation" value="date Debut de formation :" />
+      <p:calendar id="dateDebutFormation" value="#{FormationMB.dateDebutFormation}" required="true" />
+        <p:message for="dateDebutFormation" />
+      <br />
+      <p:outputLabel for="dateFinFormation" value="date fin de formation :" />
+      <p:calendar id="dateFinFormation" value="#{FormationMB.dateFinFormation}" required="true" />
+        <p:message for="dateFinFormation" />
+      <br />
+       <div class="form-group">
+   
+<p:selectOneMenu id="idFormateur" value="9"> 
+
+    <f:selectItems value="#{FormateurMB.mesFormateurs}"/>
+
+                            </p:selectOneMenu> 
+
+     </div>
+  
+                 <p:commandButton id="addFormation"  action="#{FormationMB.addFormation()}"  value="Ajouter"  ajax="false"/>
+                  <p:commandButton id="reset" action="f/addFormation.xhtml" value="Annuler" ajax="false"/>
+        </h:form>
+    </h:body>
+</html>
+

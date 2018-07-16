@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="Application_GRH" match-schema="dbo"/>
+  <table-filter match-name="heure_supplementaire"/>
+  <table-filter match-name="conge_normal"/>
+  <table-filter match-name="candidat"/>
+  <table-filter match-name="Personnel"/>
+  <table-filter match-name="formateur"/>
+  <table-filter match-name="conge_maladie"/>
+  <table-filter match-name="formation"/>
+  <table-filter match-name="absence"/>
+  <table-filter match-name="projet"/>
+</hibernate-reverse-engineering>

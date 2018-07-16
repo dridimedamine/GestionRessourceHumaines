@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      <h:head>
+     
+    </h:head>
+    <h:body>
+        <h:form id="frm">  
+            <p:dataTable var="lst" value="#{FormateurMB.listformateur}" id="tbl">
+    <p:column headerText="nom et prenom">
+        <h:outputText value="#{lst.nomPrenomFormateur}" />
+    </p:column>
+ 
+   
+ 
+    <p:column headerText="cin">
+        <h:outputText value="#{lst.cinFormateur}" />
+    </p:column>
+ <p:column headerText="cv">
+     <a href="#{lst.cv}" target="_blank">Telecharger</a>    </p:column>
+                           
+            <p:column headerText="Action">
+      <p:growl id="message" showDetail="true" />
+      
+  <p:commandButton update=":frm:detail1"  icon ="ui-icon-refresh"  title="View" oncomplete="PF('dlg1').show()">
+      <f:setPropertyActionListener value="#{lst}" target="#{FormateurMB.selectedformateur}" />
+  </p:commandButton>
+      
+ 
+      <p:commandButton icon="ui-icon-trash" actionListener="#{FormateurMB.supprimerFormateur(lst)}"  update=":frm:tbl">
+        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+    </p:commandButton>
+      
+ 
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+    </p:confirmDialog>
+    </p:column>
+</p:dataTable>
+            <p:dialog id="dialog1" widgetVar="dlg1" showEffect="fade" hideEffect="fade"  header="Mettre à jour founisseur" modal="true" width="500" height="500">
+                <p:outputPanel id="detail1" style="text-align:center;" layout="block">                   
+                    <table class="table table-bordered  table-hover">   
+                     <tr>
+                        <td><h:outputText value="nom et prenom"  styleClass="form-control"/></td>
+                        <td><h:inputText value="#{FormateurMB.selectedformateur.nomPrenomFormateur}" styleClass="form-control" /> </td>
+                      </tr>
+                        <tr>
+                        <td><h:outputText value="cin"  styleClass="form-control"/></td>
+                        <td><h:inputText value="#{FormateurMB.selectedformateur.cinFormateur}" styleClass="form-control" /> </td>
+                      </tr>
+                      
+                        
+                       <tr>
+                           <td colspan="2"><h:commandButton styleClass="btn btn-md btn-primary" action="#{FormateurMB.updateFormateur(FormateurMB.selectedformateur)}" value="Mettre a jour"/></td>
+                      </tr> 
+                         
+                         </table>
+                    
+                </p:outputPanel>
+
+            </p:dialog> 
+            
+            
+            
+            
+        </h:form>
+        
+       
+    </h:body>
+</html>
+
+

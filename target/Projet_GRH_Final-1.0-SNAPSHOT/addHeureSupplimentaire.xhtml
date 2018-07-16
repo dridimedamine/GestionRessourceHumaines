@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        
+    </h:head>
+    <h:body>
+        <h:form>
+        
+       
+       <p:outputLabel for="nombreHeureSupp" value="nombre d'heures" />
+       <p:inputText id="nombreHeureSupp" value="#{HeureSupplementaireMB.nombreHeureSupp}" required="true" />
+       <p:message for="nombreHeureSupp" />
+<br />
+ 
+ <p:selectOneMenu id="idPersonnel" value="9"> 
+
+    <f:selectItems value="#{PersonnelMB.mesPersonel}"/>
+
+                            </p:selectOneMenu> 
+<br/>
+
+<p:commandButton id="addHeureSupplimentaire"  action="#{HeureSupplementaireMB.addHeureSupplimentaire()}"  value="Ajouter"  ajax="false"/>
+                  <p:commandButton id="reset" action="f/addHeureSupplimentaire.xhtml" value="Annuler" ajax="false"/>
+        </h:form>
+    </h:body>
+</html>
+
